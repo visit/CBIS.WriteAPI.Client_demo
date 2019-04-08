@@ -1,4 +1,5 @@
-﻿using CBISimpaler.Services.Product;
+﻿using CBISimpaler.Services.Organization;
+using CBISimpaler.Services.Product;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace CBISimpaler.Services
         public static SetProduct setProducts = new SetProduct();
         public static Helpers helpers = new Helpers();
         public static GetProducts getProducts = new GetProducts();
+        public static OrganizationServices org = new OrganizationServices(orgRef);
     }
 
     public class Helpers

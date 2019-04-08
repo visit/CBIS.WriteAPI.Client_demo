@@ -13,8 +13,7 @@ namespace CBISimpaler.Services.Product
 
         public async Task SetSingleProduct(string orgRef)
         {
-            OrganizationServices org = new OrganizationServices(orgRef);
-
+            
             Console.WriteLine("Which attributeid should we update?");
             int attributeId = int.Parse(Console.ReadLine());
 
@@ -22,11 +21,11 @@ namespace CBISimpaler.Services.Product
             Console.WriteLine("Which culture?");
             Console.WriteLine("\n");
 
-            org.ShowOrganizationCultures();
+            Globals.org.ShowOrganizationCultures();
 
             int culturePick = int.Parse(Console.ReadKey().KeyChar.ToString());
 
-            string culture = org.GetOrganizationCultures[culturePick];
+            string culture = Globals.org.GetOrganizationCultures[culturePick];
 
             //refactor to allow various input types
             Console.WriteLine("What would you like the value to be?");
@@ -40,30 +39,9 @@ namespace CBISimpaler.Services.Product
             {
                 case 'y':
 
-                    //refactor to allow multiple language and attributes
-                    CBISWriteAPIModelsInformationKey attribute = new CBISWriteAPIModelsInformationKey
-                    {
-                        AttributeId = attributeId,
-                        Culture = culture
-                    };
+                    CBISWriteAPIModelsQueryEditInformation jsonString = PrepareSetData(attributeId, culture, data);
 
-                    //refactor to allow multiple language and attributes
-                    CBISWriteAPIModelsInformation infomodel = new CBISWriteAPIModelsInformation
-                    {
-                        Attribute = attribute,
-                        Value = data
-                    };
-
-                    var setList = new List<CBISWriteAPIModelsInformation>();
-                    setList.Add(infomodel);
-
-                    CBISWriteAPIModelsQueryEditInformation jsonstring = new CBISWriteAPIModelsQueryEditInformation
-                    {
-                        Set = setList,
-                        Delete = default
-                    };
-
-                    await setData("cbis:1741743", orgRef, jsonstring);
+                    await setData("cbis:1741743", orgRef, jsonString);
 
                     break;
 
@@ -71,6 +49,34 @@ namespace CBISimpaler.Services.Product
                     Globals.helpers.MainMenu();
                     break;
             }
+        }
+
+        private CBISWriteAPIModelsQueryEditInformation PrepareSetData(int attributeId, string culture, string data)
+        {
+            //refactor to allow multiple language and attributes
+            CBISWriteAPIModelsInformationKey attribute = new CBISWriteAPIModelsInformationKey
+            {
+                AttributeId = attributeId,
+                Culture = culture
+            };
+
+            //refactor to allow multiple language and attributes
+            CBISWriteAPIModelsInformation infomodel = new CBISWriteAPIModelsInformation
+            {
+                Attribute = attribute,
+                Value = data
+            };
+
+            var setList = new List<CBISWriteAPIModelsInformation>();
+            setList.Add(infomodel);
+
+            CBISWriteAPIModelsQueryEditInformation jsonstring = new CBISWriteAPIModelsQueryEditInformation
+            {
+                Set = setList,
+                Delete = default
+            };
+
+            return jsonstring;
         }
 
         public async Task setData(string productReference, string orgId, CBISWriteAPIModelsQueryEditInformation json)
