@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace CBISImpaler.Models
+namespace CBISimpaler.Models
 {
     using Newtonsoft.Json;
     using System.Collections;

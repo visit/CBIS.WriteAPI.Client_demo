@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace CBISImpaler
+namespace CBISimpaler
 {
     using Models;
     using System.Collections;

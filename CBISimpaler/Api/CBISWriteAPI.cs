@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace CBISImpaler
+namespace CBISimpaler
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;

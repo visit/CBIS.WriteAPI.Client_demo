@@ -8,7 +8,7 @@ namespace CBISimpaler.Models
     public class Credentials
     {
         public static BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials();
-        public static CBISImpaler.CBISWriteAPI client = new CBISImpaler.CBISWriteAPI(credentials);
+        public static CBISimpaler.CBISWriteAPI client = new CBISimpaler.CBISWriteAPI(credentials);
 
     }
 }
