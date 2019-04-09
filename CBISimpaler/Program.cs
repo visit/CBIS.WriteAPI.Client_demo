@@ -42,10 +42,11 @@ namespace CBISimpaler
             else
             {
                 GetSetOrgId();
-                Globals.helpers.MainMenu();
-
-                Console.ReadLine();
+                await Globals.getProducts.GetAllAttributesForOrganization(Globals.orgRef);
+                await Globals.helpers.MainMenu();
             }
+
+            Console.ReadLine();
         }
 
         private void GetSetOrgId()

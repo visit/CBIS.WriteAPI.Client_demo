@@ -8,11 +8,11 @@ namespace CBISimpaler.Services.Organization
 {
     public class OrganizationServices : Credentials
     {
+        //GET /api/meta/supplier/{organization}/culture
         public Dictionary<int, string> GetOrganizationCultures = new Dictionary<int, string>();
 
         public OrganizationServices(string orgRef)
         {
-            //Dictionary<int, string> result = new Dictionary<int, string>();
             int counter = 1;
 
             var l = client.WriteAPI.GetLanguagesForSupplier(orgRef);
@@ -33,9 +33,5 @@ namespace CBISimpaler.Services.Organization
         }
 
     }
-
-
-    //GET /api/meta/supplier/{organization}/culture
-
 
 }

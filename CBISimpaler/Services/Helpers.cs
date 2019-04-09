@@ -3,16 +3,17 @@ using CBISimpaler.Services.Product;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CBISimpaler.Services
 {
     public static class Globals
     {
         public static string orgRef;
+        public static List<CBISimpaler.Models.CBISWriteAPIModelsAttribute> attributesList = new List<CBISimpaler.Models.CBISWriteAPIModelsAttribute>();
         public static SetProduct setProducts = new SetProduct();
         public static Helpers helpers = new Helpers();
         public static GetProducts getProducts = new GetProducts();
-        public static OrganizationServices org = new OrganizationServices(orgRef);
     }
 
     public class Helpers
@@ -61,7 +62,7 @@ namespace CBISimpaler.Services
             return output;
         }
 
-        public void MainMenu()
+        public async Task MainMenu()
         {
             Console.WriteLine("\n");
             Console.WriteLine("Main Menu");
@@ -76,19 +77,13 @@ namespace CBISimpaler.Services
             switch (command.KeyChar)
             {
                 case '1':
-                    _ = Globals.setProducts.SetSingleProduct(Globals.orgRef);
+                    await Globals.setProducts.SetSingleProduct(Globals.orgRef);
                     break;
-
+                case '2':
+                    await Globals.setProducts.SetMultipleProducts(Globals.orgRef);
+                    break;
                     //add default value
             }
-
-            //var productsList = await p.GetProductsForSubSystem("cbis", orgRef);
-
-            //int productsCount = productsList.Count;
-
-            //Console.WriteLine(productsCount + " Products found!");
-
-            //await p.GetAllAttributesForOrganization(orgRef);
 
         }
     }

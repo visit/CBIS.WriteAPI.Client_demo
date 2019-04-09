@@ -17,16 +17,22 @@ namespace CBISimpaler.Services.Product
             return GetAllProducts.Body;
         }
 
-        //get /api/meta/supplier/{organization}/attribute
-        public List<CBISimpaler.Models.CBISWriteAPIModelsAttribute> attributesList = new List<CBISimpaler.Models.CBISWriteAPIModelsAttribute>();
+        //GET /api/supplier/{organization}/exists/{reference}
+        public async Task<bool> CheckIfProductExists(string productReference, string orgId)
+        {
+            var Check = await client.WriteAPI.ProductExistsForSupplierAsync(productReference, orgId);
 
+            return Check.Value;
+        }
+
+        //GET /api/meta/supplier/{organization}/attribute
         public async Task GetAllAttributesForOrganization(string orgId)
         {
             var GetAllAttributes = await client.WriteAPI.GetAttributesForSupplierWithHttpMessagesAsync(orgId);
 
             foreach (var x in GetAllAttributes.Body)
             {
-                attributesList.Add(x);
+                Globals.attributesList.Add(x);
             }
         }
 
@@ -59,22 +65,6 @@ namespace CBISimpaler.Services.Product
             }
         }
 
-    }
-
-    public class Attribute
-    {
-        public int AttributId { get; set; }
-        public bool LanguageInvariant { get; set; }
-        public bool AllowHtml { get; set; }
-        public Translations Translations { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-    }
-
-    public class Translations
-    {
-        public string Title { get; set; }
-        public string Value { get; set; }
     }
 
 }
