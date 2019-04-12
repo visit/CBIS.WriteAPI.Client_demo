@@ -21,6 +21,8 @@ namespace CBISimpaler
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("---CBIS Impaler---");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Targeting: " + client.BaseUri.AbsoluteUri.ToString());
             Console.WriteLine("\n");
 
             Console.ForegroundColor = ConsoleColor.White;
